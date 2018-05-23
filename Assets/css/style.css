@@ -1,0 +1,8 @@
+body{
+    background-image: url("../images/stadium.jpg");
+    background-size: cover;
+}
+img{
+    height:200px;
+    width: 200px;
+}
