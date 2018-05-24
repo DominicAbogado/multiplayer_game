@@ -9,11 +9,34 @@ $(document).ready(function() {
   var losses = 0;
   var ties = 0;
 
-  var playerOneChoice = ""
+  var playerOneChoice = "Hello Firebase"
   var options = ["r", "p", "s"];
 
-  //Setting up audio
 
+  //Initializing Firebase
+
+  var config = {
+    apiKey: "AIzaSyAEmo2BOh1i3-_lZKXdZ5NMhLWLV-u-mNY",
+    authDomain: "assignment7-98cc2.firebaseapp.com",
+    databaseURL: "https://assignment7-98cc2.firebaseio.com",
+    projectId: "assignment7-98cc2",
+    storageBucket: "assignment7-98cc2.appspot.com",
+    messagingSenderId: "585066709574"
+  };
+  firebase.initializeApp(config);
+
+  var database = firebase.database();
+
+  database.ref().on("value", function(snapshot){
+    console.log(snapshot.val());
+        playerOneChoice = snapshot.val().PoC;
+        console.log(playerOneChoice);
+    }, function(errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
+      
+
+  //Setting up audio
   //Theme Song
   var audioElement = document.createElement("audio");
   audioElement.setAttribute(
