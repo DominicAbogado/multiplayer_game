@@ -1,8 +1,17 @@
 body{
     background-image: url("../images/stadium.jpg");
-    background-size: cover;
+    background-size: fixed;
 }
 img{
     height:200px;
     width: 200px;
+}
+.scoreBoard{
+    background-color:lightgray;
+    height:225px;
+    width: 400px;
+    position:fixed;
+    bottom: 467px;
+    left:750px;
+
 }

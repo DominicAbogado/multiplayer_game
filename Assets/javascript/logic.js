@@ -5,15 +5,21 @@ $(document).ready(function() {
 
   console.log("Hello World");
 
-  var options = ["r", "p", "s"];
   var wins = 0;
   var losses = 0;
   var ties = 0;
 
-  //Setting up audtio
+  var playerOneChoice = ""
+  var options = ["r", "p", "s"];
 
+  //Setting up audio
+
+  //Theme Song
   var audioElement = document.createElement("audio");
-  audioElement.setAttribute("src", "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/battleMusic.mp3");
+  audioElement.setAttribute(
+    "src",
+    "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/battleMusic.mp3"
+  );
 
   // Theme Button
   $(".theme-button").on("click", function() {
@@ -25,91 +31,156 @@ $(document).ready(function() {
     audioElement.pause();
   });
 
-  //Hover Functions LEFT
+  //Pokemon Cry
+  var charCry = document.createElement("audio");
+  var blastCry = document.createElement("audio");
+  var venuCry = document.createElement("audio");
 
-  //FIRE Hover
-  $('.fire_left').mouseover(function(){
-    $('.fire_left').animate({ height: "250px", width:"250px" });
-  }).mouseout(function(){ 
-    $(this).stop().animate({width: "200px",height:"200px"});
-  });
+  //Game Choices
+  var fire = $(".fire_left");
+  var water = $(".water_left")
+  var grass = $(".grass_left")
 
-  //WATER Hover
-  $('.water_left').mouseover(function(){
-    $('.water_left').animate({ height: "250px", width:"250px" });
-  }).mouseout(function(){ 
-    $(this).stop().animate({width: "200px",height:"200px"});
-  });
+  charCry.setAttribute(
+    "src",
+    "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/charCry.mp3"
+  );
+  blastCry.setAttribute(
+    "src",
+    "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/blastCry.mp3"
+  );
+  venuCry.setAttribute(
+    "src",
+    "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/venuCry.mp3"
+  );
 
-  //GRASS Hover
-  $('.grass_left').mouseover(function(){
-    $('.grass_left').animate({ height: "250px", width:"250px" });
-  }).mouseout(function(){ 
-    $(this).stop().animate({width: "200px",height:"200px"});
-  });
+//   //Hover Functions LEFT
 
+//   //FIRE Hover
+//   $(".fire_left")
+//     .mouseover(function() {
+//       charCry.play();
+//       $(".fire_left").animate({ height: "250px", width: "250px" });
+//     })
+//     .mouseout(function() {
+//       $(this)
+//         .stop()
+//         .animate({ width: "200px", height: "200px" });
+//     });
 
-  //Hover Functions right
+//   //WATER Hover
+//   $(".water_left")
+//     .mouseover(function() {
+//       blastCry.play();
+//       $(".water_left").animate({ height: "250px", width: "250px" });
+//     })
+//     .mouseout(function() {
+//       $(this)
+//         .stop()
+//         .animate({ width: "200px", height: "200px" });
+//     });
 
-  //FIRE Hover
-  $('.fire_right').mouseover(function(){
-    $('.fire_right').animate({ height: "250px", width:"250px" });
-  }).mouseout(function(){ 
-    $(this).stop().animate({width: "200px",height:"200px"});
-  });
+//   //GRASS Hover
+//   $(".grass_left")
+//     .mouseover(function() {
+//       venuCry.play();
+//       $(".grass_left").animate({ height: "250px", width: "250px" });
+//     })
+//     .mouseout(function() {
+//       $(this)
+//         .stop()
+//         .animate({ width: "200px", height: "200px" });
+//     });
 
-  //WATER Hover
-  $('.water_right').mouseover(function(){
-    $('.water_right').animate({ height: "250px", width:"250px" });
-  }).mouseout(function(){ 
-    $(this).stop().animate({width: "200px",height:"200px"});
-  });
+//   //Hover Functions right
 
-  //GRASS Hover
-  $('.grass_right').mouseover(function(){
-    $('.grass_right').animate({ height: "250px", width:"250px" });
-  }).mouseout(function(){ 
-    $(this).stop().animate({width: "200px",height:"200px"});
-  });
+//   //FIRE Hover
+//   $(".fire_right")
+//     .mouseover(function() {
+//       charCry.play();
+//       $(".fire_right").animate({ height: "250px", width: "250px" });
+//     })
+//     .mouseout(function() {
+//       $(this)
+//         .stop()
+//         .animate({ width: "200px", height: "200px" });
+//     });
 
+//   //WATER Hover
+//   $(".water_right")
+//     .mouseover(function() {
+//       blastCry.play();
+//       $(".water_right").animate({ height: "250px", width: "250px" });
+//     })
+//     .mouseout(function() {
+//       $(this)
+//         .stop()
+//         .animate({ width: "200px", height: "200px" });
+//     });
 
+//   //GRASS Hover
+//   $(".grass_right")
+//     .mouseover(function() {
+//       venuCry.play();
+//       $(".grass_right").animate({ height: "250px", width: "250px" });
+//     })
+//     .mouseout(function() {
+//       $(this)
+//         .stop()
+//         .animate({ width: "200px", height: "200px" });
+//     });
 
+    //Click Functions
+    $(".playerOneChoice").on("click", ".fire_left", function(){
+        playerOneChoice = "";
+        playerOneChoice = "r";
+        console.log(playerOneChoice);
+    })
+    $(".playerOneChoice").on("click", ".water_left", function(){
+        playerOneChoice = ""
+        playerOneChoice = "p";
+        console.log(playerOneChoice);
+    })
+    $(".playerOneChoice").on("click", ".grass_left", function(){
+        playerOneChoice = ""
+        playerOneChoice = "s";
+        console.log(playerOneChoice);
+    })
 
-
-
-  // Rock Paper Scissors Logic
-  $(document).on("keyup", function() {
-    var userguess = String.fromCharCode(event.keyCode).toLowerCase();
-    var computerguess = options[Math.floor(Math.random() * options.length)];
+//   Rock Paper Scissors Logic
+  $(".playerOne").on("click", function() {
+    // var userguess = String.fromCharCode(event.keyCode).toLowerCase();
+    computerguess = options[Math.floor(Math.random() * options.length)];
+    var p1c = playerOneChoice
 
     console.log(computerguess);
 
-    if (userguess == "r" || userguess == "p" || userguess == "s") {
-      if (userguess == "r" && computerguess == "s") {
+    if (playerOneChoice == "r" || playerOneChoice == "p" || playerOneChoice == "s") {
+      if (playerOneChoice == "r" && computerguess == "s") {
         wins++;
         alert("Wins: " + wins);
       }
-      if (userguess == "r" && computerguess == "p") {
+      if (playerOneChoice == "r" && computerguess == "p") {
         losses++;
         alert("Losses " + losses);
       }
-      if (userguess == "s" && computerguess == "p") {
+      if (playerOneChoice == "s" && computerguess == "p") {
         wins++;
         alert("Wins " + wins);
       }
-      if (userguess == "s" && computerguess == "r") {
+      if (playerOneChoice == "s" && computerguess == "r") {
         losses++;
         alert("Losses " + losses);
       }
-      if (userguess == "p" && computerguess == "s") {
+      if (playerOneChoice == "p" && computerguess == "s") {
         losses++;
         alert("Losses " + losses);
       }
-      if (userguess == "p" && computerguess == "r") {
+      if (playerOneChoice == "p" && computerguess == "r") {
         wins++;
         alert("Wins " + wins);
       }
-      if (userguess == computerguess) {
+      if (playerOneChoice == computerguess) {
         ties++;
         alert("Ties " + ties);
       }
