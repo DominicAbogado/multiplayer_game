@@ -9,9 +9,8 @@ $(document).ready(function() {
   var losses = 0;
   var ties = 0;
 
-  var playerOneChoice = "Hello Firebase"
+  var playerOneChoice = "Hello Firebase";
   var options = ["r", "p", "s"];
-
 
   //Initializing Firebase
 
@@ -27,14 +26,17 @@ $(document).ready(function() {
 
   var database = firebase.database();
 
-  database.ref().on("value", function(snapshot){
-    console.log(snapshot.val());
-        playerOneChoice = snapshot.val().PoC;
-        console.log(playerOneChoice);
-    }, function(errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      });
-      
+  database.ref().on(
+    "value",
+    function(snapshot) {
+      console.log(snapshot.val());
+      playerOneChoice = snapshot.val().PoC;
+      console.log(playerOneChoice);
+    },
+    function(errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    }
+  );
 
   //Setting up audio
   //Theme Song
@@ -44,14 +46,30 @@ $(document).ready(function() {
     "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/battleMusic.mp3"
   );
 
-  // Theme Button
-  $(".theme-button").on("click", function() {
+  //play song
+  function playSong() {
     audioElement.play();
+  }
+
+  function pauseSong() {
+    audioElement.pause();
+  }
+
+  //Start Gamee Function
+  $(".startGame").on("click", function() {
+    $(".titleScreen").hide();
+    playSong();
+  });
+
+  // Theme Button
+  $(".battle-play").on("click", function() {
+    pauseSong();
+    playSong();
   });
 
   // Pause Button
-  $(".pause-button").on("click", function() {
-    audioElement.pause();
+  $(".battle-pause").on("click", function() {
+    pauseSong();
   });
 
   //Pokemon Cry
@@ -61,8 +79,8 @@ $(document).ready(function() {
 
   //Game Choices
   var fire = $(".fire_left");
-  var water = $(".water_left")
-  var grass = $(".grass_left")
+  var water = $(".water_left");
+  var grass = $(".grass_left");
 
   charCry.setAttribute(
     "src",
@@ -77,152 +95,147 @@ $(document).ready(function() {
     "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/venuCry.mp3"
   );
 
-//   //Hover Functions LEFT
+  //Hover Functions LEFT
 
-//   //FIRE Hover
-//   $(".fire_left")
-//     .mouseover(function() {
-//       charCry.play();
-//       $(".fire_left").animate({ height: "250px", width: "250px" });
-//     })
-//     .mouseout(function() {
-//       $(this)
-//         .stop()
-//         .animate({ width: "200px", height: "200px" });
-//     });
-
-//   //WATER Hover
-//   $(".water_left")
-//     .mouseover(function() {
-//       blastCry.play();
-//       $(".water_left").animate({ height: "250px", width: "250px" });
-//     })
-//     .mouseout(function() {
-//       $(this)
-//         .stop()
-//         .animate({ width: "200px", height: "200px" });
-//     });
-
-//   //GRASS Hover
-//   $(".grass_left")
-//     .mouseover(function() {
-//       venuCry.play();
-//       $(".grass_left").animate({ height: "250px", width: "250px" });
-//     })
-//     .mouseout(function() {
-//       $(this)
-//         .stop()
-//         .animate({ width: "200px", height: "200px" });
-//     });
-
-//   //Hover Functions right
-
-//   //FIRE Hover
-//   $(".fire_right")
-//     .mouseover(function() {
-//       charCry.play();
-//       $(".fire_right").animate({ height: "250px", width: "250px" });
-//     })
-//     .mouseout(function() {
-//       $(this)
-//         .stop()
-//         .animate({ width: "200px", height: "200px" });
-//     });
-
-//   //WATER Hover
-//   $(".water_right")
-//     .mouseover(function() {
-//       blastCry.play();
-//       $(".water_right").animate({ height: "250px", width: "250px" });
-//     })
-//     .mouseout(function() {
-//       $(this)
-//         .stop()
-//         .animate({ width: "200px", height: "200px" });
-//     });
-
-//   //GRASS Hover
-//   $(".grass_right")
-//     .mouseover(function() {
-//       venuCry.play();
-//       $(".grass_right").animate({ height: "250px", width: "250px" });
-//     })
-//     .mouseout(function() {
-//       $(this)
-//         .stop()
-//         .animate({ width: "200px", height: "200px" });
-//     });
-
-    //Click Functions
-    $(".playerOneChoice").on("click", ".fire_left", function(){
-        playerOneChoice = "";
-        playerOneChoice = "r";
-        console.log(playerOneChoice);
+  //FIRE Hover
+  $(".fire_left")
+    .mouseover(function() {
+      charCry.play();
+      $(".fire_left").animate({ height: "150px", width: "150px" });
     })
-    $(".playerOneChoice").on("click", ".water_left", function(){
-        playerOneChoice = ""
-        playerOneChoice = "p";
-        console.log(playerOneChoice);
-    })
-    $(".playerOneChoice").on("click", ".grass_left", function(){
-        playerOneChoice = ""
-        playerOneChoice = "s";
-        console.log(playerOneChoice);
-    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
 
-//   Rock Paper Scissors Logic
+  //WATER Hover
+  $(".water_left")
+    .mouseover(function() {
+      blastCry.play();
+      $(".water_left").animate({ height: "150px", width: "150px" });
+    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
+
+  //GRASS Hover
+  $(".grass_left")
+    .mouseover(function() {
+      venuCry.play();
+      $(".grass_left").animate({ height: "150px", width: "150px" });
+    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
+
+  //Hover Functions right
+
+  //FIRE Hover
+  $(".fire_right")
+    .mouseover(function() {
+      charCry.play();
+      $(".fire_right").animate({ height: "150px", width: "150px" });
+    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
+
+  //WATER Hover
+  $(".water_right")
+    .mouseover(function() {
+      blastCry.play();
+      $(".water_right").animate({ height: "150px", width: "150px" });
+    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
+
+  //GRASS Hover
+  $(".grass_right")
+    .mouseover(function() {
+      venuCry.play();
+      $(".grass_right").animate({ height: "150px", width: "150px" });
+    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
+
+  //Click Functions
+  $(".playerOneChoice").on("click", ".fire_left", function() {
+    playerOneChoice = "";
+    playerOneChoice = "r";
+    console.log(playerOneChoice);
+  });
+  $(".playerOneChoice").on("click", ".water_left", function() {
+    playerOneChoice = "";
+    playerOneChoice = "p";
+    console.log(playerOneChoice);
+  });
+  $(".playerOneChoice").on("click", ".grass_left", function() {
+    playerOneChoice = "";
+    playerOneChoice = "s";
+    console.log(playerOneChoice);
+  });
+
+  //   Rock Paper Scissors Logic
   $(".playerOne").on("click", function() {
     // var userguess = String.fromCharCode(event.keyCode).toLowerCase();
+    var winPoint = $("#p1Wins");
+    var losePoint = $("#p1Lose");
+    var tiePoint = $("#p1Ties");
     computerguess = options[Math.floor(Math.random() * options.length)];
-    var p1c = playerOneChoice
+    var p1c = playerOneChoice;
 
     console.log(computerguess);
 
-    if (playerOneChoice == "r" || playerOneChoice == "p" || playerOneChoice == "s") {
+    if (
+      playerOneChoice == "r" ||
+      playerOneChoice == "p" ||
+      playerOneChoice == "s"
+    ) {
       if (playerOneChoice == "r" && computerguess == "s") {
         wins++;
-        alert("Wins: " + wins);
+        winPoint.text("Wins: " + wins);
       }
       if (playerOneChoice == "r" && computerguess == "p") {
         losses++;
-        alert("Losses " + losses);
+        losePoint.text("Losses: " + losses);
       }
       if (playerOneChoice == "s" && computerguess == "p") {
         wins++;
-        alert("Wins " + wins);
+        winPoint.text("Wins: " + wins);
       }
       if (playerOneChoice == "s" && computerguess == "r") {
         losses++;
-        alert("Losses " + losses);
+        losePoint.text("Losses: " + losses);
       }
       if (playerOneChoice == "p" && computerguess == "s") {
         losses++;
-        alert("Losses " + losses);
+        losePoint.text("Losses: " + losses);
       }
       if (playerOneChoice == "p" && computerguess == "r") {
         wins++;
-        alert("Wins " + wins);
+        winPoint.text("Wins: " + wins);
       }
       if (playerOneChoice == computerguess) {
         ties++;
-        alert("Ties " + ties);
+        tiePoint.text("Ties: " + ties);
       }
     } else {
       alert("Please choose either r, p, or s");
     }
   });
 
-  var html =
-    "<p>Press either r, p, or s to start playing</p>" +
-    "<p>Wins: " +
-    wins +
-    "</p>" +
-    "<p>Losses: " +
-    losses +
-    "</p>" +
-    "<p>Ties: " +
-    ties +
-    "</p>";
-
-  document.querySelector("#game").innerHTML = html;
+  $()
 });
