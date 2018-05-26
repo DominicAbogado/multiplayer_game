@@ -1,42 +1,28 @@
 $(document).ready(function() {
-  $("#test").on("click", function() {
-    alert("Hello");
-  });
-
   console.log("Hello World");
+
 
   var wins = 0;
   var losses = 0;
   var ties = 0;
 
-  var playerOneChoice = "Hello Firebase";
+  var playerOneChoice = "";
+  var playerTwoChoice = "";
   var options = ["r", "p", "s"];
 
   //Initializing Firebase
 
-  var config = {
-    apiKey: "AIzaSyAEmo2BOh1i3-_lZKXdZ5NMhLWLV-u-mNY",
-    authDomain: "assignment7-98cc2.firebaseapp.com",
-    databaseURL: "https://assignment7-98cc2.firebaseio.com",
-    projectId: "assignment7-98cc2",
-    storageBucket: "assignment7-98cc2.appspot.com",
-    messagingSenderId: "585066709574"
-  };
-  firebase.initializeApp(config);
+  // var config = {
+  //   apiKey: "AIzaSyAEmo2BOh1i3-_lZKXdZ5NMhLWLV-u-mNY",
+  //   authDomain: "assignment7-98cc2.firebaseapp.com",
+  //   databaseURL: "https://assignment7-98cc2.firebaseio.com",
+  //   projectId: "assignment7-98cc2",
+  //   storageBucket: "assignment7-98cc2.appspot.com",
+  //   messagingSenderId: "585066709574"
+  // };
+  // firebase.initializeApp(config);
 
-  var database = firebase.database();
-
-  database.ref().on(
-    "value",
-    function(snapshot) {
-      console.log(snapshot.val());
-      playerOneChoice = snapshot.val().PoC;
-      console.log(playerOneChoice);
-    },
-    function(errorObject) {
-      console.log("The read failed: " + errorObject.code);
-    }
-  );
+  // var database = firebase.database();
 
   //Setting up audio
   //Theme Song
@@ -146,7 +132,6 @@ $(document).ready(function() {
         .stop()
         .animate({ width: "100px", height: "100px" });
     });
-
   //WATER Hover
   $(".water_right")
     .mouseover(function() {
@@ -188,54 +173,53 @@ $(document).ready(function() {
     console.log(playerOneChoice);
   });
 
-  //   Rock Paper Scissors Logic
-  $(".playerOne").on("click", function() {
-    // var userguess = String.fromCharCode(event.keyCode).toLowerCase();
-    var winPoint = $("#p1Wins");
-    var losePoint = $("#p1Lose");
-    var tiePoint = $("#p1Ties");
-    computerguess = options[Math.floor(Math.random() * options.length)];
-    var p1c = playerOneChoice;
-
-    console.log(computerguess);
-
-    if (
-      playerOneChoice == "r" ||
-      playerOneChoice == "p" ||
-      playerOneChoice == "s"
-    ) {
-      if (playerOneChoice == "r" && computerguess == "s") {
-        wins++;
-        winPoint.text("Wins: " + wins);
-      }
-      if (playerOneChoice == "r" && computerguess == "p") {
-        losses++;
-        losePoint.text("Losses: " + losses);
-      }
-      if (playerOneChoice == "s" && computerguess == "p") {
-        wins++;
-        winPoint.text("Wins: " + wins);
-      }
-      if (playerOneChoice == "s" && computerguess == "r") {
-        losses++;
-        losePoint.text("Losses: " + losses);
-      }
-      if (playerOneChoice == "p" && computerguess == "s") {
-        losses++;
-        losePoint.text("Losses: " + losses);
-      }
-      if (playerOneChoice == "p" && computerguess == "r") {
-        wins++;
-        winPoint.text("Wins: " + wins);
-      }
-      if (playerOneChoice == computerguess) {
-        ties++;
-        tiePoint.text("Ties: " + ties);
-      }
-    } else {
-      alert("Please choose either r, p, or s");
-    }
-  });
-
-  $()
 });
+
+//   Rock Paper Scissors Logic
+$(".playerOne").on("click", function() {
+  // var userguess = String.fromCharCode(event.keyCode).toLowerCase();
+  var winPoint = $("#p1Wins");
+  var losePoint = $("#p1Lose");
+  var tiePoint = $("#p1Ties");
+  computerguess = options[Math.floor(Math.random() * options.length)];
+  var p1c = playerOneChoice;
+
+  console.log(computerguess);
+
+  // if (
+  //   playerOneChoice == "r" ||
+  //   playerOneChoice == "p" ||
+  //   playerOneChoice == "s")
+  //   {
+  //   if (playerOneChoice == "r" && computerguess == "s") {
+  //     wins++;
+  //     winPoint.text("Wins: " + wins);
+  //   }
+  //   if (playerOneChoice == "r" && computerguess == "p") {
+  //     losses++;
+  //     losePoint.text("Losses: " + losses);
+  //   }
+  //   if (playerOneChoice == "s" && computerguess == "p") {
+  //     wins++;
+  //     winPoint.text("Wins: " + wins);
+  //   }
+  //   if (playerOneChoice == "s" && computerguess == "r") {
+  //     losses++;
+  //     losePoint.text("Losses: " + losses);
+  //   }
+  //   if (playerOneChoice == "p" && computerguess == "s") {
+  //     losses++;
+  //     losePoint.text("Losses: " + losses);
+  //   }
+  //   if (playerOneChoice == "p" && computerguess == "r") {
+  //     wins++;
+  //     winPoint.text("Wins: " + wins);
+  //   }
+  //   if (playerOneChoice == computerguess) {
+  //     ties++;
+  //     tiePoint.text("Ties: " + ties);
+  //   } else {
+  //   alert("Please choose either r, p, or s")
+  //   };
+  // });
+})
