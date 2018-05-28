@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Multiplayer RPS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="screen" href="test.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+</head>
+
+<body>
+<!-- 
+  <div class="titleScreen">
+    <button type="button" class="btn btn-primary btn-lg startGame">Start Game</button>
+  </div> -->
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12 textArea">
+              <p id="testText"></p>
+          </div>
+      </div>
+    <div class="row justify-content-lg-center">
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col-lg-4 playerOneSection">
+            <div class="playerOneChoice playerChoice">
+              <div class="row">
+                <div class="col-lg-4 playerOne">
+                  <img class="fire_left fire" src="Assets/images/charizard_left.png">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 playerOne">
+                  <img class="water_left water" src="Assets/images/blast_left.png">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 playerOne">
+                  <img class="grass_left grass" src="Assets/images/venu_left.png">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 playerOneScore">
+                  <p id="p1Wins">Wins:
+                  </p>
+                  <p id="p1Lose">Lossses:
+                  </p>
+                  <p id="p1Ties">Ties:
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 arena">
+            <!-- <div class="scoreBoard"> -->
+
+          </div>
+          <!-- <div class="row">
+            <div class="col-lg-4 playerTwo">
+              <div class="playerTwoChoice playerChoice">
+                <div class="row">
+                  <div class="col-lg-4 playerTwo">
+                    <img class="fire_right fire" src="Assets/images/charizard.png">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 playerTwo">
+                    <div class="playerTwoChoice playerChoice">
+                      <img class="water_right water" src="Assets/images/blast.png">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 playerTwo">
+                    <div class="playerTwoChoice playerChoice">
+                      <img class="grass_right grass" src="Assets/images/venu.png">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 playerOneScore">
+                    <p>Wins:
+                    </p>
+                    <p>Lose:
+                    </p>
+                    <p>Ties:
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-lg-center">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
+        <button type="button" class="btn btn-primary btn-lg battle-play">Play Song</button>
+        <button type="button" class="btn btn-primary btn-lg battle-pause">Pause Song</button>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+
+    <script src='test.js'></script>
+</body>
+
+</html>
