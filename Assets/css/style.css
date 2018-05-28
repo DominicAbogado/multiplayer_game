@@ -25,3 +25,10 @@ img{
     text-align: center;
 
 }
+.arena{
+    opacity: .7;
+    height:100px;
+    width:100%;
+    top:150px;
+
+}

@@ -1,5 +1,5 @@
 body{
-    /* background-image: url("../images/stadium.jpg"); */
+    background-image: url("../images/stadium.jpg");
     background-size: 100%;
 }
 img{
@@ -28,5 +28,6 @@ img{
 .textArea{
     background-color: white;
     height:100px;
-
+    position: fixed;
+    top:200px;
 }

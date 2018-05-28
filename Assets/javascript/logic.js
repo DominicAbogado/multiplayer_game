@@ -1,6 +1,7 @@
 $(document).ready(function() {
   console.log("Hello World");
 
+  var playerOne = "No Move Yet";
 
   var wins = 0;
   var losses = 0;
@@ -10,8 +11,6 @@ $(document).ready(function() {
   var playerTwoChoice = "";
   var options = ["r", "p", "s"];
 
-  //Initializing Firebase
-
   var config = {
     apiKey: "AIzaSyAEmo2BOh1i3-_lZKXdZ5NMhLWLV-u-mNY",
     authDomain: "assignment7-98cc2.firebaseapp.com",
@@ -20,9 +19,21 @@ $(document).ready(function() {
     storageBucket: "assignment7-98cc2.appspot.com",
     messagingSenderId: "585066709574"
   };
+
   firebase.initializeApp(config);
 
   var database = firebase.database();
+
+  database.ref().on("value", function(snapshot) {
+      if(snapshot.child("playerOne").exists()){
+          playerOne = snapshot.val().playerOne;
+          $("#testText").text((snapshot.val().playerOne));
+          
+      } else {
+    $("#testText").append(playerOne);
+      }
+    
+  });
 
   //Setting up audio
   //Theme Song
@@ -44,7 +55,7 @@ $(document).ready(function() {
   //Start Gamee Function
   $(".startGame").on("click", function() {
     $(".titleScreen").hide();
-    playSong();
+    // playSong();
   });
 
   // Theme Button
@@ -81,102 +92,106 @@ $(document).ready(function() {
     "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/venuCry.mp3"
   );
 
-  // //Hover Functions LEFT
+  //Hover Functions LEFT
 
-  // //FIRE Hover
-  // $(".fire_left")
-  //   .mouseover(function() {
-  //     charCry.play();
-  //     $(".fire_left").animate({ height: "150px", width: "150px" });
-  //   })
-  //   .mouseout(function() {
-  //     $(this)
-  //       .stop()
-  //       .animate({ width: "100px", height: "100px" });
-  //   });
+  //FIRE Hover
+  $(".fire_left")
+    .mouseover(function() {
+      charCry.play();
+      $(".fire_left").animate({ height: "150px", width: "150px" });
+    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
 
-  // //WATER Hover
-  // $(".water_left")
-  //   .mouseover(function() {
-  //     blastCry.play();
-  //     $(".water_left").animate({ height: "150px", width: "150px" });
-  //   })
-  //   .mouseout(function() {
-  //     $(this)
-  //       .stop()
-  //       .animate({ width: "100px", height: "100px" });
-  //   });
+  //WATER Hover
+  $(".water_left")
+    .mouseover(function() {
+      blastCry.play();
+      $(".water_left").animate({ height: "150px", width: "150px" });
+    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
 
-  // //GRASS Hover
-  // $(".grass_left")
-  //   .mouseover(function() {
-  //     venuCry.play();
-  //     $(".grass_left").animate({ height: "150px", width: "150px" });
-  //   })
-  //   .mouseout(function() {
-  //     $(this)
-  //       .stop()
-  //       .animate({ width: "100px", height: "100px" });
-  //   });
+  //GRASS Hover
+  $(".grass_left")
+    .mouseover(function() {
+      venuCry.play();
+      $(".grass_left").animate({ height: "150px", width: "150px" });
+    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
 
-  // //Hover Functions right
+  //Hover Functions right
 
-  // //FIRE Hover
-  // $(".fire_right")
-  //   .mouseover(function() {
-  //     charCry.play();
-  //     $(".fire_right").animate({ height: "150px", width: "150px" });
-  //   })
-  //   .mouseout(function() {
-  //     $(this)
-  //       .stop()
-  //       .animate({ width: "100px", height: "100px" });
-  //   });
-  // //WATER Hover
-  // $(".water_right")
-  //   .mouseover(function() {
-  //     blastCry.play();
-  //     $(".water_right").animate({ height: "150px", width: "150px" });
-  //   })
-  //   .mouseout(function() {
-  //     $(this)
-  //       .stop()
-  //       .animate({ width: "100px", height: "100px" });
-  //   });
+  //FIRE Hover
+  $(".fire_right")
+    .mouseover(function() {
+      charCry.play();
+      $(".fire_right").animate({ height: "150px", width: "150px" });
+    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
+  //WATER Hover
+  $(".water_right")
+    .mouseover(function() {
+      blastCry.play();
+      $(".water_right").animate({ height: "150px", width: "150px" });
+    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
 
-  // //GRASS Hover
-  // $(".grass_right")
-  //   .mouseover(function() {
-  //     venuCry.play();
-  //     $(".grass_right").animate({ height: "150px", width: "150px" });
-  //   })
-  //   .mouseout(function() {
-  //     $(this)
-  //       .stop()
-  //       .animate({ width: "100px", height: "100px" });
-  //   });
+  //GRASS Hover
+  $(".grass_right")
+    .mouseover(function() {
+      venuCry.play();
+      $(".grass_right").animate({ height: "150px", width: "150px" });
+    })
+    .mouseout(function() {
+      $(this)
+        .stop()
+        .animate({ width: "100px", height: "100px" });
+    });
 
   //Click Functions
   $(".playerOneChoice").on("click", ".fire_left", function() {
     playerOneChoice = "";
-    playerOneChoice = "r";
+    playerOneChoice = "FIREBLAST";
     console.log(playerOneChoice);
     database.ref().set({
-      playerOne: playerOneChoice,
+      playerOne: playerOneChoice
     });
-    console.log(database.val().playerOne)
   });
   $(".playerOneChoice").on("click", ".water_left", function() {
     playerOneChoice = "";
-    playerOneChoice = "p";
+    playerOneChoice = "WATERFALL!";
     console.log(playerOneChoice);
+    database.ref().set({
+      playerOne: playerOneChoice
+    });
   });
   $(".playerOneChoice").on("click", ".grass_left", function() {
     playerOneChoice = "";
-    playerOneChoice = "s";
+    playerOneChoice = "SOLAR BEAM";
     console.log(playerOneChoice);
+    database.ref().set({
+      playerOne: playerOneChoice
+    });
   });
-
 });
 
 //   Rock Paper Scissors Logic
