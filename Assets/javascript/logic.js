@@ -235,7 +235,6 @@ $(document).ready(function() {
       if (playerOneChoice == fire && computerguess == grass) {
         wins++;
         winPoint.text("Wins: " + wins);
-        alert("WIN")
       }
       if (playerOneChoice == fire && computerguess == water) {
         losses++;
