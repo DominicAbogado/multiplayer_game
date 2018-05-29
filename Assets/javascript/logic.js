@@ -1,7 +1,8 @@
 $(document).ready(function() {
   console.log("Hello World");
 
-  var playerOne = "No Move Yet";
+  var playerOne = "...";
+  var playerTwo = "..."
 
   var wins = 0;
   var losses = 0;
@@ -9,7 +10,14 @@ $(document).ready(function() {
 
   var playerOneChoice = "";
   var playerTwoChoice = "";
-  var options = ["r", "p", "s"];
+
+
+  //New Options 
+  var fire = "FIREBLAST"
+  var water = "WATERFALL"
+  var grass = "SOLARBEAM"
+
+  var options = [fire, water, grass]
 
   var config = {
     apiKey: "AIzaSyAEmo2BOh1i3-_lZKXdZ5NMhLWLV-u-mNY",
@@ -25,14 +33,15 @@ $(document).ready(function() {
   var database = firebase.database();
 
   database.ref().on("value", function(snapshot) {
-      if(snapshot.child("playerOne").exists()){
-          playerOne = snapshot.val().playerOne;
-          $("#testText").text((snapshot.val().playerOne));
-          
-      } else {
-    $("#testText").append(playerOne);
-      }
-    
+    if (snapshot.child("playerOne").exists() && snapshot.child("playerTwo").exists()) {
+      playerOne = snapshot.val().playerOne;
+      playerTwo = snapshot.val().playerTwo;
+      $("#playerOneRPS").text(snapshot.val().playerOne);
+      $("#playerTwoRPS").text(snapshot.val().playerTwo);
+    } else {
+      $("#playerOneRPS").append(playerOne);
+      $("#playerTwoRPS").append(playerTwo);
+    }
   });
 
   //Setting up audio
@@ -173,7 +182,8 @@ $(document).ready(function() {
     playerOneChoice = "FIREBLAST";
     console.log(playerOneChoice);
     database.ref().set({
-      playerOne: playerOneChoice
+      playerOne: playerOneChoice,
+      playerTwo: playerTwoChoice
     });
   });
   $(".playerOneChoice").on("click", ".water_left", function() {
@@ -181,7 +191,8 @@ $(document).ready(function() {
     playerOneChoice = "WATERFALL!";
     console.log(playerOneChoice);
     database.ref().set({
-      playerOne: playerOneChoice
+      playerOne: playerOneChoice,
+      playerTwo: playerTwoChoice
     });
   });
   $(".playerOneChoice").on("click", ".grass_left", function() {
@@ -189,58 +200,67 @@ $(document).ready(function() {
     playerOneChoice = "SOLAR BEAM";
     console.log(playerOneChoice);
     database.ref().set({
-      playerOne: playerOneChoice
+      playerOne: playerOneChoice,
+      playerTwo: playerTwoChoice
     });
   });
+
+  //   Rock Paper Scissors Logic
+  $(".playerOne").on("click", function() {
+    // var userguess = String.fromCharCode(event.keyCode).toLowerCase();
+    var winPoint = $("#p1Wins");
+    var losePoint = $("#p1Lose");
+    var tiePoint = $("#p1Ties");
+
+    var fire = "FIREBLAST"
+    var water = "WATERFALL"
+    var grass = "SOLARBEAM"
+
+    playerTwoChoice = "";
+    computerguess = options[Math.floor(Math.random() * options.length)];
+    playerTwoChoice = computerguess;
+    database.ref().set({
+      playerTwo: playerTwoChoice
+    })
+
+    var p1c = playerOneChoice;
+
+    console.log(computerguess);
+
+    if (
+      playerOneChoice == fire ||
+      playerOneChoice == water ||
+      playerOneChoice == grass
+    ) {
+      if (playerOneChoice == fire && computerguess == grass) {
+        wins++;
+        winPoint.text("Wins: " + wins);
+        alert("WIN")
+      }
+      if (playerOneChoice == fire && computerguess == water) {
+        losses++;
+        losePoint.text("Losses: " + losses);
+      }
+      if (playerOneChoice == grass && computerguess == water) {
+        wins++;
+        winPoint.text("Wins: " + wins);
+      }
+      if (playerOneChoice == grass && computerguess == fire) {
+        losses++;
+        losePoint.text("Losses: " + losses);
+      }
+      if (playerOneChoice == water && computerguess == grass) {
+        losses++;
+        losePoint.text("Losses: " + losses);
+      }
+      if (playerOneChoice == water && computerguess == fire) {
+        wins++;
+        winPoint.text("Wins: " + wins);
+      }
+      if (playerOneChoice == computerguess) {
+        ties++;
+        tiePoint.text("Ties: " + ties);
+      }
+    }
+  });
 });
-
-//   Rock Paper Scissors Logic
-$(".playerOne").on("click", function() {
-  // var userguess = String.fromCharCode(event.keyCode).toLowerCase();
-  var winPoint = $("#p1Wins");
-  var losePoint = $("#p1Lose");
-  var tiePoint = $("#p1Ties");
-  computerguess = options[Math.floor(Math.random() * options.length)];
-  var p1c = playerOneChoice;
-
-  console.log(computerguess);
-
-  if (
-    playerOneChoice == "r" ||
-    playerOneChoice == "p" ||
-    playerOneChoice == "s")
-    {
-    if (playerOneChoice == "r" && computerguess == "s") {
-      wins++;
-      winPoint.text("Wins: " + wins);
-    }
-    if (playerOneChoice == "r" && computerguess == "p") {
-      losses++;
-      losePoint.text("Losses: " + losses);
-    }
-    if (playerOneChoice == "s" && computerguess == "p") {
-      wins++;
-      winPoint.text("Wins: " + wins);
-    }
-    if (playerOneChoice == "s" && computerguess == "r") {
-      losses++;
-      losePoint.text("Losses: " + losses);
-    }
-    if (playerOneChoice == "p" && computerguess == "s") {
-      losses++;
-      losePoint.text("Losses: " + losses);
-    }
-    if (playerOneChoice == "p" && computerguess == "r") {
-      wins++;
-      winPoint.text("Wins: " + wins);
-    }
-    if (playerOneChoice == computerguess) {
-      ties++;
-      tiePoint.text("Ties: " + ties);
-    } else {
-    alert("Please choose either r, p, or s")
-    };
-  }
-
-
-})
