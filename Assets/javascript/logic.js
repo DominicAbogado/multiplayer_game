@@ -64,7 +64,7 @@ $(document).ready(function() {
   //Start Gamee Function
   $(".startGame").on("click", function() {
     $(".titleScreen").hide();
-    // playSong();
+    playSong();
   });
 
   // Theme Button
