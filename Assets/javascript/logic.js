@@ -49,7 +49,7 @@ $(document).ready(function() {
   var audioElement = document.createElement("audio");
   audioElement.setAttribute(
     "src",
-    "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/battleMusic.mp3"
+    "Assets/audio/battleMusic.mp3"
   );
 
   //play song
@@ -90,15 +90,15 @@ $(document).ready(function() {
 
   charCry.setAttribute(
     "src",
-    "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/charCry.mp3"
+    "Assets/audio/charCry.mp3"
   );
   blastCry.setAttribute(
     "src",
-    "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/blastCry.mp3"
+    "Assets/audio/blastCry.mp3"
   );
   venuCry.setAttribute(
     "src",
-    "/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/audio/venuCry.mp3"
+    "Assets/audio/venuCry.mp3"
   );
 
   //Hover Functions LEFT
