@@ -2,7 +2,7 @@ $(document).ready(function() {
   console.log("Hello World");
 
   var playerOne = "...";
-  var playerTwo = "..."
+  var playerTwo = "...";
 
   var wins = 0;
   var losses = 0;
@@ -11,13 +11,17 @@ $(document).ready(function() {
   var playerOneChoice = "";
   var playerTwoChoice = "";
 
+  var user = "";
+  var message = "";
+  var initialUser = "No One Here";
+  var initialMessage = "No Messages";
 
-  //New Options 
-  var fire = "FIREBLAST"
-  var water = "WATERFALL"
-  var grass = "SOLARBEAM"
+  //New Options
+  var fire = "FIREBLAST";
+  var water = "WATERFALL";
+  var grass = "SOLARBEAM";
 
-  var options = [fire, water, grass]
+  var options = [fire, water, grass];
 
   var config = {
     apiKey: "AIzaSyAEmo2BOh1i3-_lZKXdZ5NMhLWLV-u-mNY",
@@ -33,7 +37,11 @@ $(document).ready(function() {
   var database = firebase.database();
 
   database.ref().on("value", function(snapshot) {
-    if (snapshot.child("playerOne").exists() && snapshot.child("playerTwo").exists()) {
+    var sv = snapshot.val();
+    if (
+      snapshot.child("playerOne").exists() &&
+      snapshot.child("playerTwo").exists()
+    ) {
       playerOne = snapshot.val().playerOne;
       playerTwo = snapshot.val().playerTwo;
       $("#playerOneRPS").text(snapshot.val().playerOne);
@@ -44,22 +52,50 @@ $(document).ready(function() {
     }
   });
 
+  database.ref("/chat").on("child_added", function(Childsnapshot) {
+    console.log(Childsnapshot.val());
+    var sv = Childsnapshot.val();
+      $("#user").append(("<p>")+ sv.userName + ": " + sv.messageContent);
+  },
+  function(errorObject) {
+    console.log("The read failed: " + errorObject.code);
+  }
+);
+
+
+  $("#submit").on("click", function(event) {
+    // Prevent form from submitting
+    event.preventDefault();
+
+    // Get the input values
+    user = $("#user-input")
+      .val()
+      .trim();
+    message = $("#message-input")
+      .val()
+      .trim();
+
+    database.ref("/chat").push({
+      userName: user,
+      messageContent: message
+    });
+    console.log(user);
+    console.log(message);
+  });
+
   //Setting up audio
   //Theme Song
-  var audioElement = document.createElement("audio");
-  audioElement.setAttribute(
-    "src",
-    "Assets/audio/battleMusic.mp3"
-  );
+  // var audioElement = document.createElement("audio");
+  // audioElement.setAttribute("src", "Assets/audio/battleMusic.mp3");
 
-  //play song
-  function playSong() {
-    audioElement.play();
-  }
+  // //play song
+  // function playSong() {
+  //   audioElement.play();
+  // }
 
-  function pauseSong() {
-    audioElement.pause();
-  }
+  // function pauseSong() {
+  //   audioElement.pause();
+  // }
 
   //Start Gamee Function
   $(".startGame").on("click", function() {
@@ -88,18 +124,9 @@ $(document).ready(function() {
   var water = $(".water_left");
   var grass = $(".grass_left");
 
-  charCry.setAttribute(
-    "src",
-    "Assets/audio/charCry.mp3"
-  );
-  blastCry.setAttribute(
-    "src",
-    "Assets/audio/blastCry.mp3"
-  );
-  venuCry.setAttribute(
-    "src",
-    "Assets/audio/venuCry.mp3"
-  );
+  charCry.setAttribute("src", "Assets/audio/charCry.mp3");
+  blastCry.setAttribute("src", "Assets/audio/blastCry.mp3");
+  venuCry.setAttribute("src", "Assets/audio/venuCry.mp3");
 
   //Hover Functions LEFT
 
@@ -212,16 +239,16 @@ $(document).ready(function() {
     var losePoint = $("#p1Lose");
     var tiePoint = $("#p1Ties");
 
-    var fire = "FIREBLAST"
-    var water = "WATERFALL"
-    var grass = "SOLARBEAM"
+    var fire = "FIREBLAST";
+    var water = "WATERFALL";
+    var grass = "SOLARBEAM";
 
     playerTwoChoice = "";
     computerguess = options[Math.floor(Math.random() * options.length)];
     playerTwoChoice = computerguess;
     database.ref().set({
       playerTwo: playerTwoChoice
-    })
+    });
 
     var p1c = playerOneChoice;
 

@@ -53,11 +53,7 @@
             </div>
           </div>
           <div class="col-lg-4 arena">
-            <p> Player One Used: </p>
-              <p id="playerOneRPS"></p>
-              <p>Player Two Used: </p>
-              <p id="playerTwoRPS"></p>
-
+            <div class="trashtalk"></div>
           </div>
           <div class="row">
             <div class="col-lg-4 playerTwo">
@@ -81,23 +77,24 @@
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-lg-4 playerOneScore">
-                    <p>Wins:
-                    </p>
-                    <p>Lose:
-                    </p>
-                    <p>Ties:
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row justify-content-lg-center">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="list-messages" id="listMessages">
+          <p id="user"></p>
+          <p id="message"></p>
+        </div>
+        <div class="new-message" id="newMessage">
+          <input type="text" id="user-input" placeholder="name..">
+          <input type="text" id="message-input" placeholder="text..">
+          <button class="btn btn-primary" id="submit" type="submit">Submit</button>
+        </div>
+      </div>
       <div class="col-lg-2"></div>
       <div class="col-lg-8">
         <button type="button" class="btn btn-primary btn-lg battle-play">Play Song</button>
@@ -105,8 +102,9 @@
       </div>
       <div class="col-lg-2"></div>
     </div>
+  </div>
 
-    <script src='Assets/javascript/logic.js'></script>
+  <script src='Assets/javascript/logic.js'></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 body{
-    background-image: url("Assets/images/stadium.jpg");
-    background-size: 100%;
+    background-color:grey;
+    background-size: auto;
 }
 img{
     height:100px;
@@ -17,18 +17,11 @@ img{
 }
 .titleScreen{
     z-index: 10000;
-    background-image: url("Assets/images/league.jpg");
+    background-image: url("/Users/dominicabogado/xmen/assignment7/multiplayer_game/Assets/images/league.jpg");
     background-size:100%;
     position: fixed;
     width: 100%;
     height:100%;
     text-align: center;
-
-}
-.arena{
-    opacity: .7;
-    height:100px;
-    width:100%;
-    top:150px;
 
 }
